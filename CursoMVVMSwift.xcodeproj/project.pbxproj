@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D16D88152DB87ECC00899966 /* ToDoEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16D88142DB87ECB00899966 /* ToDoEntity+CoreDataProperties.swift */; };
+		D16D88162DB87ECC00899966 /* ToDoEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16D88132DB87ECB00899966 /* ToDoEntity+CoreDataClass.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		6D6FB89B2D07D13C00412AB5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +32,8 @@
 		6D6FB88A2D07D13B00412AB5 /* CursoMVVMSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CursoMVVMSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D6FB89A2D07D13C00412AB5 /* CursoMVVMSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CursoMVVMSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D6FB8A42D07D13C00412AB5 /* CursoMVVMSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CursoMVVMSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D16D88132DB87ECB00899966 /* ToDoEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ToDoEntity+CoreDataClass.swift"; path = "CursoMVVMSwift/Models/ToDoEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D16D88142DB87ECB00899966 /* ToDoEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ToDoEntity+CoreDataProperties.swift"; path = "CursoMVVMSwift/Models/ToDoEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +82,8 @@
 		6D6FB8812D07D13B00412AB5 = {
 			isa = PBXGroup;
 			children = (
+				D16D88132DB87ECB00899966 /* ToDoEntity+CoreDataClass.swift */,
+				D16D88142DB87ECB00899966 /* ToDoEntity+CoreDataProperties.swift */,
 				6D6FB88C2D07D13B00412AB5 /* CursoMVVMSwift */,
 				6D6FB89D2D07D13C00412AB5 /* CursoMVVMSwiftTests */,
 				6D6FB8A72D07D13C00412AB5 /* CursoMVVMSwiftUITests */,
@@ -236,6 +245,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D16D88152DB87ECC00899966 /* ToDoEntity+CoreDataProperties.swift in Sources */,
+				D16D88162DB87ECC00899966 /* ToDoEntity+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

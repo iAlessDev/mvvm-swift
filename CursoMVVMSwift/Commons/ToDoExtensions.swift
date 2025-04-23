@@ -8,9 +8,7 @@
 import SwiftUI
 
 extension View {
-    public func cornerRadius(
-        _ radius: CGFloat,
-        corners: UIRectCorner) -> some View {
+    public func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape(
             ToDoRoundedCorner(
                 radius: radius,
@@ -24,3 +22,15 @@ extension View {
         }
     }
 }
+
+#Preview {
+    VStack{
+        Text("Hello World")
+            .padding()
+            .background(Color.red)
+            .cornerRadius(10, corners: .allCorners)
+            .transparentScrolling()
+    }
+}
+
+

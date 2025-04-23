@@ -71,5 +71,21 @@ public struct ToDoTextInput: View {
             }
         }
     }
-    
+}
+
+#Preview {
+    VStack {
+        Spacer()
+        Text("Preview")
+            .font(.headline)
+        Spacer()
+        ToDoTextInput(
+            "Add a new to-do",
+            text: .constant("I'm doing great!"),
+            label: "Hi, How're you?",
+            variant: .textField
+        )
+    }
+    .padding(20)
+    .background(Color.gray.opacity(0.2))
 }

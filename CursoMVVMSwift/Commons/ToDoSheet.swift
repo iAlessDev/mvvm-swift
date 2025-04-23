@@ -7,9 +7,16 @@
 
 import SwiftUI
 
+/*
+ ToDoSheet<Content>: View -> Generic Parameter of the ToDoSheetView
+ Where Content: View -> Content should be a view
+ */
 struct ToDoSheet<Content>: View where Content: View {
     
+    // Modify father view showing property
     @Binding public var isShow: Bool
+    
+    // Allows closure-style view declarations
     @ViewBuilder public var content: () -> Content
     
     var body: some View {
@@ -56,3 +63,25 @@ struct ToDoSheet<Content>: View where Content: View {
         .animation(nil, value: UUID())
     }
 }
+
+#Preview {
+    ToDoSheet(isShow: .constant(true)) {
+        VStack(spacing: 16) {
+            Text("📝 Tarea pendiente")
+                .font(.title2)
+                .fontWeight(.bold)
+            
+            Text("Esta es una vista de ejemplo dentro del ToDoSheet.")
+                .multilineTextAlignment(.center)
+            
+            Button("Cerrar") {
+                print("Cerrar sheet") // solo para demostrar interacción
+            }
+            .padding()
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .clipShape(Capsule())
+        }
+    }
+}
+
