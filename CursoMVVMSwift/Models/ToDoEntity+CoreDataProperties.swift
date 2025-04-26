@@ -18,10 +18,10 @@ extension ToDoEntity {
 
     @NSManaged public var isArchived: Bool
     @NSManaged public var isCompleted: Bool
-    @NSManaged public var date: Date?
+    @NSManaged public var date: Date
     @NSManaged public var note: String?
     @NSManaged public var title: String?
-    @NSManaged public var id: String?
+    @NSManaged public var id: String
 
 }
 
