@@ -10,13 +10,19 @@ import SwiftUI
 /*
  ToDoSheet<Content>: View -> Generic Parameter of the ToDoSheetView
  Where Content: View -> Content should be a view
+ 
+ The function ToDoSheet is like a background template
+ that can be used in multiple views
  */
 struct ToDoSheet<Content>: View where Content: View {
     
     // Modify father view showing property
     @Binding public var isShow: Bool
     
-    // Allows closure-style view declarations
+    // Allows closure-style view declaration
+    // The view builder allows the use of closures to create multiple views
+    // and is returned as a single view
+    // in this case the toDoAddView
     @ViewBuilder public var content: () -> Content
     
     var body: some View {
@@ -26,8 +32,6 @@ struct ToDoSheet<Content>: View where Content: View {
                 .onTapGesture {
                     isShow.toggle()
                 }
-                .animation(nil, value: UUID())
-            
             VStack {
                 HStack {
                     Spacer()
@@ -44,9 +48,9 @@ struct ToDoSheet<Content>: View where Content: View {
                 content()
                 Spacer()
             }
-            .padding(24)
+            .padding()
             .frame(maxWidth: .infinity)
-            .frame(height: UIScreen.main.bounds.height * 0.7)
+            .frame(height: UIScreen.main.bounds.height * 0.6)
             .background(
                 Color(UIColor.secondarySystemBackground)
             )
@@ -60,28 +64,14 @@ struct ToDoSheet<Content>: View where Content: View {
         .ignoresSafeArea(edges: .bottom)
         .zIndex(2.0)
         .transition(.move(edge: .bottom))
-        .animation(nil, value: UUID())
+        .animation(.spring(response: 0.4, dampingFraction: 0.7), value: isShow)
     }
 }
 
 #Preview {
     ToDoSheet(isShow: .constant(true)) {
-        VStack(spacing: 16) {
-            Text("📝 Tarea pendiente")
-                .font(.title2)
-                .fontWeight(.bold)
-            
-            Text("Esta es una vista de ejemplo dentro del ToDoSheet.")
-                .multilineTextAlignment(.center)
-            
-            Button("Cerrar") {
-                print("Cerrar sheet") // solo para demostrar interacción
-            }
-            .padding()
-            .background(Color.blue)
-            .foregroundColor(.white)
-            .clipShape(Capsule())
-        }
+        ToDoAddView(showed: .constant(true))
+            .environmentObject(ToDoViewModel())
     }
 }
 
