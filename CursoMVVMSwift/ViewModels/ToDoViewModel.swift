@@ -53,6 +53,7 @@ public final class ToDoViewModel: ObservableObject {
     private func saveData() {
         do {
             try storeContainer.viewContext.save()
+            fetchToDos()
         } catch {
             print("Error saving data")
         }
@@ -78,12 +79,34 @@ public final class ToDoViewModel: ObservableObject {
         return text.trimmingCharacters(in: .whitespaces).count >= 2
     }
     
-    public func addToDo(){
+    public func addToDo(title: String, note: String, date: Date) {
+        let newToDo = ToDoEntity(context: storeContainer.viewContext)
+        newToDo.id = UUID().uuidString
+        newToDo.title = title
+        newToDo.note = note
+        newToDo.date = date
+        newToDo.isCompleted = false
+        newToDo.isArchived = false
         
+        saveData()
     }
     
-    public func updateToDo(){
+    public func updateToDo(
+        _ toDo: ToDoEntity,
+        withNewTitle title: String,
+        withNewNote note: String,
+        withNewDate date: Date
+    )
+    {
+        guard
+            let index = getToDoIndex(toDo)
+        else {return}
         
+        toDos[index].title = title
+        toDos[index].note = note
+        toDos[index].date = date
+        
+        saveData()
     }
     
     public func updateToDoStatus(){
