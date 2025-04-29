@@ -109,19 +109,33 @@ public final class ToDoViewModel: ObservableObject {
         saveData()
     }
     
-    public func updateToDoStatus(){
+    public func updateToDoStatus(for toDo: ToDoEntity){
+        guard
+            let index = getToDoIndex(toDo)
+        else { return }
         
+        toDos[index].isCompleted.toggle()
+        saveData()
     }
     
-    public func deleteToDo(){
+    public func deleteToDo(_ toDo: ToDoEntity) {
+        guard
+            let index = toDos.firstIndex(of: toDo)
+        else { return }
         
+        let toDoToRemove = toDos[index]
+        storeContainer.viewContext.delete(toDoToRemove)
+        
+        saveData()
+    }
+
+    
+    public func toggleArchiveStatus(for toDo: ToDoEntity) {
+        guard let index = getToDoIndex(toDo) else { return }
+        
+        toDos[index].isArchived.toggle()
+        saveData()
     }
     
-    public func archiveToDo(){
-        
-    }
-    
-    public func unarchiveToDo(){
-        
-    }
 }
+
