@@ -22,21 +22,7 @@ public struct ToDoArchivedListView: View {
                 
                 // MARK: - Empty State
                 if archivedToDosList.isEmpty {
-                    VStack(spacing: 16) {
-                        Image(systemName: "tray")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 80, height: 80)
-                            .foregroundColor(.gray.opacity(0.7))
-                        
-                        Text("There are no archived tasks")
-                            .font(.title2.bold())
-                            .foregroundColor(.gray)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal, 32)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .padding(.top, 80)
+                    NoToDosView(typeOfView: .archived)
                     
                 // MARK: - Archived ToDo List
                 } else {
