@@ -51,6 +51,8 @@ public struct ToDoList: View {
                         }
                     }
                     .padding(.horizontal, 16)
+                } else {
+                    NoToDosView(typeOfView: .task)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
