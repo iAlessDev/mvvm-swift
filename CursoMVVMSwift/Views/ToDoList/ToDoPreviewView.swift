@@ -9,7 +9,7 @@ import SwiftUI
 struct ToDoPreviewView: View {
     
     // Class that is used to edit the preview of the ToDo
-
+    
     // MARK: - Properties
     // Te enviroment object doesnt need to be passed from the ToDoListView manually
     // because it is already in the environment since ContentView injected it to all the app
@@ -21,7 +21,16 @@ struct ToDoPreviewView: View {
     
     // State that say if the ToDo creation sheet is shown
     @State private var showedTodoCreationSheet: Bool = false
-
+    
+    // State that say if the toDo will be archived or unarchived
+    private var archivedActionText: String {
+        if let toDo = toDo {
+            return toDo.isArchived ? "Unarchive" : "Archive"
+        } else {
+            return ""
+        }
+    }
+    
     // MARK: - Body
     var body: some View {
         
@@ -29,6 +38,8 @@ struct ToDoPreviewView: View {
         if let safeToDo = toDo {
             
             ZStack(alignment: .bottom) {
+                
+                
                 Rectangle()
                     .fill(.thinMaterial)
                     .ignoresSafeArea()
@@ -37,6 +48,8 @@ struct ToDoPreviewView: View {
                             toDo = nil
                         }
                     }
+                
+                
                 VStack(spacing: 36) {
                     HStack {
                         VStack(alignment: .leading) {
@@ -48,17 +61,22 @@ struct ToDoPreviewView: View {
                                 .year()
                                 .hour()
                                 .minute())
+                            .foregroundStyle(Color.white)
                             
-                            Text(safeToDo.title!)
+                            
+                            Text(safeToDo.title ?? "")
                                 .font(.title3)
                                 .fontWeight(.semibold)
+                                .foregroundStyle(Color.white)
                         }
                         Spacer()
+                        ToDoStatusView(toDo: safeToDo)
                     }
+                    
                     if let note = safeToDo.note {
                         Text(note)
                             .font(.body)
-                            .foregroundStyle(Color.primary)
+                            .foregroundStyle(Color.white)
                             .lineLimit(2)
                     }
                     
@@ -66,34 +84,34 @@ struct ToDoPreviewView: View {
                     HStack(spacing: 16) {
                         Button {
                             showedTodoCreationSheet = true
-                            
                         } label: {
-                            Text("Editar")
+                            Text("Edit")
                                 .frame(maxWidth: .infinity)
                                 .font(.headline)
-                                .foregroundStyle(Color.primary)
+                                .foregroundStyle(Color.white)
                                 .padding(.vertical, 8)
                                 .padding(.horizontal, 32)
                                 .overlay {
                                     Capsule(style: .circular)
-                                        .stroke(Color.primary, lineWidth: 1)
+                                        .stroke(Color.white, lineWidth: 1)
                                 }
                         }
                         Spacer()
                         Button {
-                            
-                            
-                            
+                            withAnimation(.easeInOut) {
+                                viewModel.toggleArchiveStatus(for: safeToDo)
+                                toDo = nil
+                            }
                         } label: {
-                            Text("Archivar")
+                            Text(archivedActionText)
                                 .frame(maxWidth: .infinity)
                                 .font(.headline)
-                                .foregroundStyle(Color.primary)
+                                .foregroundStyle(Color.white)
                                 .padding(.vertical, 8)
                                 .padding(.horizontal, 32)
                                 .overlay {
                                     Capsule(style: .circular)
-                                        .stroke(Color.primary, lineWidth: 1)
+                                        .stroke(Color.white, lineWidth: 1)
                                 }
                         }
                     }
@@ -103,6 +121,8 @@ struct ToDoPreviewView: View {
                 .background(Color.indigo)
                 .clipShape(.rect(cornerRadius: 10))
                 .padding(8)
+                
+                
             }
             .frame(maxWidth: UIScreen.main.bounds.width)
             .frame(maxHeight: UIScreen.main.bounds.height)
