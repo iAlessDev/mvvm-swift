@@ -41,19 +41,21 @@ public struct ToDoList: View {
                     LazyVGrid(columns: columns, spacing: 16) {
                         ForEach(unArchivedToDos) { toDo in
                             ToDoItemView(toDo: toDo)
-                                // onTapGesture to show the preview
+                            // onTapGesture to show the preview
                                 .onTapGesture {
                                     withAnimation {
                                         // Here is where the toDo is assigned
                                         toDoPreview = toDo
                                     }
                                 }
-                                .padding(.horizontal, 16)
                         }
                     }
+                    .padding(.horizontal, 16)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
+            // Overlay
             .overlay {
                 // if isShowedSheet is true, show the ToDoSheet
                 // Display add a new ToDo Menu
@@ -81,8 +83,9 @@ public struct ToDoList: View {
                     HStack(spacing: 0) {
                         NavigationLink {
                             ToDoArchivedListView()
+                                .environmentObject(viewModel)
                         } label: {
-                            Image(systemName: "trash")
+                            Image(systemName: "tray")
                                 .font(.system(size: 18, weight: .semibold))
                                 .foregroundStyle(Color.primary)
                         }
