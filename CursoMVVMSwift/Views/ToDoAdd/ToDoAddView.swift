@@ -117,7 +117,7 @@ public struct ToDoAddView: View {
             if let toDo = toDo {
                 title = toDo.title ?? ""
                 note = toDo.note ?? ""
-                date = toDo.date
+                date = toDo.date ?? Date()
             }
         }
         .background(.thinMaterial)
