@@ -18,22 +18,26 @@ public struct ToDoItemView: View {
         if !toDo.id.isEmpty {
             VStack(alignment: .leading, spacing: 8) {
                 HStack(alignment:.top, spacing: 4) {
-                    Text(toDo.date, format: .dateTime.day())
+                    Text(toDo.date ?? Date(), format: .dateTime.day())
                         .font(.system(size: 44, weight: .semibold))
                         .padding(.top, -8)
                         .foregroundStyle(Color(UIColor.white))
                     VStack(alignment: .leading, spacing: 0) {
-                        Text(toDo.date, format: .dateTime.month())
+                        Text(toDo.date ?? Date(), format: .dateTime.month())
                             .fontWeight(.semibold)
                             .foregroundStyle(Color.white)
-                        Text(toDo.date, format: .dateTime.weekday(.abbreviated))
+                        Text(toDo.date ?? Date(), format: .dateTime.weekday(.abbreviated))
                             .fontWeight(.semibold)
                             .foregroundStyle(Color.white)
                     }
                     .padding(.top, -2)
                     Spacer(minLength: 2)
-                    
-                    
+                    ToDoStatusView(toDo: toDo)
+                        .onTapGesture {
+                            withAnimation(.interactiveSpring) {
+                                viewModel.updateToDoStatus(for: toDo)
+                            }
+                        }
                 }
                 VStack(alignment: .leading) {
                     Text(toDo.title ?? "")
@@ -55,7 +59,7 @@ public struct ToDoItemView: View {
                 HStack(spacing: 4){
                     Text("Hora:")
                         .foregroundStyle(Color.white)
-                    Text(toDo.date, format: .dateTime.hour().minute())
+                    Text(toDo.date ?? Date(), format: .dateTime.hour().minute())
                         .fontWeight(.thin)
                         .font(.caption)
                         .fontWeight(.light)
@@ -75,12 +79,4 @@ public struct ToDoItemView: View {
 
 
 #Preview {
-    let context = ToDoPersistenceManager.shared.container.viewContext
-    let sampleToDo = ToDoEntity(context: context)
-    sampleToDo.id = UUID().uuidString
-    sampleToDo.date = Date()
-    sampleToDo.note = "Nota de ejemplo para el Preview."
-    
-    return ToDoItemView(toDo: sampleToDo)
-        .environmentObject(ToDoViewModel())
 }
